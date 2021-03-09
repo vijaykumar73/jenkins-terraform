@@ -1,0 +1,23 @@
+pipeline{
+    agent any
+    tools {
+  terraform 'terraform-11'
+}
+stages{
+    stage('Git checkout'){
+        steps{
+          git credentialsId: 'vijaykumar74', url: 'https://github.com/vijaykumar73/iac-demo'
+        }
+    }
+stage('terraform init'){
+ steps{
+     sh label:'',script:'terraform init'
+ }   
+}
+   stage('Terraform Apply'){
+            steps{
+                sh label:'',script: 'terraform apply --auto-approve'
+}
+}
+}
+}
